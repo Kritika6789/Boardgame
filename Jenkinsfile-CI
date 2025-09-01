@@ -7,7 +7,7 @@ pipeline {
     }
  
     environment {
-        SONARQUBE = 'MySonarServer'  // name from Jenkins config
+        SONARQUBE = 'MySonarServer'
         MAVEN_SETTINGS = 'settings-nexus.xml'
         IMAGE_NAME = 'boardgame:latest'
         AWS_REGION = 'ap-south-1'     
