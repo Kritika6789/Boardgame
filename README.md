@@ -58,7 +58,7 @@ This web application displays lists of board games and their reviews. While anyo
 **Jenkins-Deployment:**
 
 **Prequisist:**
-Created EKS Cluster, Node groups, and connected the ec2 instance with the cluster to access it.
+Created EKS Cluster, Node groups, and connected the ec2 instance with the cluster to access it.Cluster IAM Role and NODE IAM role is created. And access point in cluster is added so that EC2 instance can access the cluster.
 - Check the connection using kubectl get nodes
 - clone the repo in instance
 - Run kubectl apply -f deployment-service.yml. After running this pods, deployment and service is created. Service type is load balancer and can access applicvation using this load balancer created on AWS.
