@@ -42,12 +42,26 @@ This web application displays lists of board games and their reviews. While anyo
 - Schema.sql file to customize the schema and input initial data
 - Thymeleaf Fragments to reduce redundancy of repeating HTML elements (head, footer, navigation)
 
-## How to Run
+Assignment-Deploy BoardGame Application on EKS Cluster.
 
-1. Clone the repository
-2. Open the project in your IDE of choice
-3. Run the application
-4. To use initial user data, use the following credentials.
-  - username: bugs    |     password: bunny (user role)
-  - username: daffy   |     password: duck  (manager role)
-5. You can also sign-up as a new user and customize your role to play with the application! 😊
+Jenkins-CI Pipeline:
+- Clone the repo
+- Perform sonarqube analysis to scan the code and check vulnerabilities, duplicate lines of code realred information on Sonarqube UI. It runs on port 9000
+- Quality Gate: Addedd the quality checks and when these checks will be passed then only image will be build
+- Build the package using mvn clean package
+- Nexus: Deploy the artifacts on Nexus. Created 2 repos on nexus, one is maven release and other one is maven snapshot.Changing the version in pom.xml to 7.0.0-SNAPSHOT will store artifacts in maven snapshot.and if version id 7.0.0 in pom.xml then artifacts will be stored in maven-release repo.Nexus is running on port 8081.
+- Install Docker
+- Build Docker image
+- Use trivy to scan image and find vulnerabilties in image
+- Push image to ECR
+
+Jenkins-Deployment:
+Prequisist:
+Created EKS Cluster, Node groups, and connected the ec2 instance with the cluster to access it.
+- Check the connection using kubectl get nodes
+- clone the repo in instance
+- Run kubectl apply -f deployment-service.yml. After running this pods, deployment and service is created. Service type is load balancer and can access applicvation using this load balancer created on AWS.
+
+MONITORING
+- Prometheus and grafana is used to monitor Jenkins and EKS Cluster.
+- Prometehus runs on port 9090 and Grafana on port 3000
