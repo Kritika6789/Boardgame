@@ -56,12 +56,13 @@ This web application displays lists of board games and their reviews. While anyo
 - Push image to ECR
 
 **Jenkins-Deployment:**
-Prequisist:
+
+**Prequisist:**
 Created EKS Cluster, Node groups, and connected the ec2 instance with the cluster to access it.
 - Check the connection using kubectl get nodes
 - clone the repo in instance
 - Run kubectl apply -f deployment-service.yml. After running this pods, deployment and service is created. Service type is load balancer and can access applicvation using this load balancer created on AWS.
 
-MONITORING
+**MONITORING**
 - Prometheus and grafana is used to monitor Jenkins and EKS Cluster.
 - Prometehus runs on port 9090 and Grafana on port 3000
