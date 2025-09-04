@@ -42,9 +42,9 @@ This web application displays lists of board games and their reviews. While anyo
 - Schema.sql file to customize the schema and input initial data
 - Thymeleaf Fragments to reduce redundancy of repeating HTML elements (head, footer, navigation)
 
-Assignment-Deploy BoardGame Application on EKS Cluster.
+**Assignment-Deploy BoardGame Application on EKS Cluster.**
 
-Jenkins-CI Pipeline:
+**Jenkins-CI Pipeline:**
 - Clone the repo
 - Perform sonarqube analysis to scan the code and check vulnerabilities, duplicate lines of code realred information on Sonarqube UI. It runs on port 9000
 - Quality Gate: Addedd the quality checks and when these checks will be passed then only image will be build
@@ -55,7 +55,7 @@ Jenkins-CI Pipeline:
 - Use trivy to scan image and find vulnerabilties in image
 - Push image to ECR
 
-Jenkins-Deployment:
+**Jenkins-Deployment:**
 Prequisist:
 Created EKS Cluster, Node groups, and connected the ec2 instance with the cluster to access it.
 - Check the connection using kubectl get nodes
