@@ -46,12 +46,13 @@ This web application displays lists of board games and their reviews. While anyo
 This Project include complete Devops Setup to deploy the application on EKS Cluster. Before deployment certain operations are performed like static code analysis, building image, storing artifacts, scanning image using trivy and pushing image to ECR. After this application is deployed on EKS Cluster.
 
 ## Components ##
-EKS Cluster- Application is deployed on it
-Jenkins - Handles CI/CD Pipeline
-SonarQube - Used to Scan image and perform Static Code analysis 
-Nexus - Used to Store Artifacts. Two Repos are created one is Nexus Snapshot and other one is Nexus release.
-Trivy - Used to scan image and find vulnerabilties in it
-ECR - Push Image to ECR
+
+- EKS Cluster- Application is deployed on it
+- Jenkins - Handles CI/CD Pipeline
+- SonarQube - Used to Scan image and perform Static Code analysis 
+- Nexus - Used to Store Artifacts. Two Repos are created one is Nexus Snapshot and other one is Nexus release.
+- Trivy - Used to scan image and find vulnerabilties in it
+- ECR - Push Image to ECR
 
 ## Jenkins-CI Pipeline: ##
 
@@ -65,17 +66,14 @@ ECR - Push Image to ECR
 - Use trivy to scan image and find vulnerabilties in image
 - Push image to ECR
 
-## Jenkins-Deployment: ##
-
-** Prequisist:**
-** EKS-CLUSTER Setup **
+## EKS-CLUSTER Setup ##
 - Create a EKS Cluster on AWS and create NODE Groups
 - While creating Cluster IAM role and NODE IAM role is used
 - Run aws eks update-kubeconfig --region your-region --name cluster-name
 - Create a Access point in EKS Cluster to connect ec2 instance with Cluster
 - Check the connection using kubectl get nodes
 
-** In Jenkins-Deployment Pipeline : **
+## Jenkins-Deployment Pipeline : ##
 - clone the repo in instance
 - Run kubectl apply -f deployment-service.yml. After running this pods, deployment and service is created. Service type is load balancer and can access applicvation using this load balancer created on AWS.
 
