@@ -53,7 +53,7 @@ Nexus - Used to Store Artifacts. Two Repos are created one is Nexus Snapshot and
 Trivy - Used to scan image and find vulnerabilties in it
 ECR - Push Image to ECR
 
-## Jenkins-CI Pipeline:##
+## Jenkins-CI Pipeline: ##
 
 - Clone the repo
 - Perform sonarqube analysis to scan the code and check vulnerabilities, duplicate lines of code realred information on Sonarqube UI. It runs on port 9000
