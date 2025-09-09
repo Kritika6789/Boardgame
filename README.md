@@ -77,7 +77,7 @@ This Project include complete Devops Setup to deploy the application on EKS Clus
 - clone the repo in instance
 - Run kubectl apply -f deployment-service.yml. After running this pods, deployment and service is created. Service type is load balancer and can access applicvation using this load balancer created on AWS.
 
-## MONITORING ##
+## Monitoring ##
 - Prometheus and grafana is used to monitor Jenkins and EKS Cluster.
 - Prometehus runs on port 9090 and Grafana on port 3000
 
