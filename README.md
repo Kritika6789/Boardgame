@@ -42,27 +42,58 @@ This web application displays lists of board games and their reviews. While anyo
 - Schema.sql file to customize the schema and input initial data
 - Thymeleaf Fragments to reduce redundancy of repeating HTML elements (head, footer, navigation)
 
-**Assignment-Deploy BoardGame Application on EKS Cluster.**
+## Working of Project ##
+This Project include complete Devops Setup to deploy the application on EKS Cluster. Before deployment certain operations are performed like static code analysis, building image, storing artifacts, scanning image using trivy and pushing image to ECR. After this application is deployed on EKS Cluster.
 
-**Jenkins-CI Pipeline:**
+## Components ##
+EKS Cluster- Application is deployed on it
+Jenkins - Handles CI/CD Pipeline
+SonarQube - Used to Scan image and perform Static Code analysis 
+Nexus - Used to Store Artifacts. Two Repos are created one is Nexus Snapshot and other one is Nexus release.
+Trivy - Used to scan image and find vulnerabilties in it
+ECR - Push Image to ECR
+
+## Jenkins-CI Pipeline:##
+
 - Clone the repo
 - Perform sonarqube analysis to scan the code and check vulnerabilities, duplicate lines of code realred information on Sonarqube UI. It runs on port 9000
 - Quality Gate: Addedd the quality checks and when these checks will be passed then only image will be build
 - Build the package using mvn clean package
-- Nexus: Deploy the artifacts on Nexus. Created 2 repos on nexus, one is maven release and other one is maven snapshot.Changing the version in pom.xml to 7.0.0-SNAPSHOT will store artifacts in maven snapshot.and if version id 7.0.0 in pom.xml then artifacts will be stored in maven-release repo.Nexus is running on port 8081.
+- Nexus: Deploy the artifacts on Nexus. Created 2 repos on nexus, one is maven release and other one is maven snapshot.Changing the version in pom.xml to 7.0.0-SNAPSHOT will store    artifacts in maven snapshot.and if version id 7.0.0 in pom.xml then artifacts will be stored in maven-release repo.Nexus is running on port 8081.
 - Install Docker
 - Build Docker image
 - Use trivy to scan image and find vulnerabilties in image
 - Push image to ECR
 
-**Jenkins-Deployment:**
+## Jenkins-Deployment: ##
 
-**Prequisist:**
-Created EKS Cluster, Node groups, and connected the ec2 instance with the cluster to access it.Cluster IAM Role and NODE IAM role is created. And access point in cluster is added so that EC2 instance can access the cluster.
+** Prequisist:**
+** EKS-CLUSTER Setup **
+- Create a EKS Cluster on AWS and create NODE Groups
+- While creating Cluster IAM role and NODE IAM role is used
+- Run aws eks update-kubeconfig --region your-region --name cluster-name
+- Create a Access point in EKS Cluster to connect ec2 instance with Cluster
 - Check the connection using kubectl get nodes
+
+** In Jenkins-Deployment Pipeline : **
 - clone the repo in instance
 - Run kubectl apply -f deployment-service.yml. After running this pods, deployment and service is created. Service type is load balancer and can access applicvation using this load balancer created on AWS.
 
-**MONITORING**
+## MONITORING ##
 - Prometheus and grafana is used to monitor Jenkins and EKS Cluster.
 - Prometehus runs on port 9090 and Grafana on port 3000
+
+## Security Group ##
+- Jenkins - Allow  HTTPS(443), Jenkins(8080), Sonarqube (9000), Nexus(8081)
+- Sonarqube - Allow sonarqube(9000), HTTPS(443), Jenkins(8080)
+- Nexus - Allow Nexus(8081), HTTPS(443), Jenkins(8080)
+- Prometheus - Allow Port 9090
+- Grafana- Allow Port 3000
+
+## Quick verification  ##
+After deployment:
+
+- Check the app loads through the load balancer
+- Look at Grafana dashboards for metrics
+- Make sure no critical security issues in the latest scan
+- Verify your JAR ended up in the right Nexus repo
