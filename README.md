@@ -66,7 +66,7 @@ This Project include complete Devops Setup to deploy the application on EKS Clus
 - Use trivy to scan image and find vulnerabilties in image
 - Push image to ECR
 
-## EKS-CLUSTER Setup ##
+## EKS-Cluster Setup ##
 - Create a EKS Cluster on AWS and create NODE Groups
 - While creating Cluster IAM role and NODE IAM role is used
 - Run aws eks update-kubeconfig --region your-region --name cluster-name
